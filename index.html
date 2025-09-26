@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎂 Happy Birthday 🎂</h1>
+    <p id="instructions">Click "Allow" on the microphone prompt, then blow out the candles!</p>
+
+    <div id="cake-area">
+      <img id="cake" src="cake.png" alt="Birthday Cake">
+      <div id="candles">
+        <img class="candle lit" src="candle.png" alt="Candle">
+        <img class="candle lit" src="candle.png" alt="Candle">
+        <img class="candle lit" src="candle.png" alt="Candle">
+      </div>
+    </div>
+
+    <button id="nextBtn" style="display:none;">Next ➡️</button>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <audio id="music" src="birthday.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
