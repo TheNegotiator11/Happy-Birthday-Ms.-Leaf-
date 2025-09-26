@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <title>Birthday Surprise 🎂</title>
 <style>
+  :root {
+    --png-scale: 1; /* Change this to scale your menu PNG */
+  }
+
   body {
     background: #222;
     color: white;
@@ -25,8 +29,11 @@
     align-items: center;
     margin: 40px auto;
     height: 300px;
+    transform: scale(1); /* default scale, we can increase on mobile */
+    transform-origin: center top;
   }
 
+  /* Cake and parts */
   .cake { position: relative; width: 250px; height: 200px; }
   .plate { width: 270px; height: 110px; position: absolute; bottom: -10px; left: -10px; background-color: #ccc; border-radius: 50%; box-shadow: 0 2px 0 #aaa,0 4px 0 #aaa,0 5px 40px rgba(0,0,0,0.5); }
   .layer { position: absolute; width: 250px; height: 100px; border-radius: 50%; background-color: #553c13; box-shadow: 0 2px 0px #5e4417,0 4px 0px #4d3710,0 6px 0px #4a350f; }
@@ -43,38 +50,50 @@
   .flame.off { display:none; }
   @keyframes flicker { 0%{transform:skewX(5deg);}25%{transform:skewX(-5deg);}50%{transform:skewX(10deg);}75%{transform:skewX(-10deg);}100%{transform:skewX(5deg);} }
 
+  /* Next button + pulsating circle */
   #nextBtn {
-    display:none;
-    margin-top:30px;
-    padding:12px 24px;
-    font-size:20px;
-    border:none;
-    border-radius:8px;
-    background:red;
-    color:white;
-    cursor:pointer;
-    position:relative;
-    z-index:10;
+    display: none;
+    margin-top: 30px;
+    padding: 12px 24px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    background: red;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
   }
-
-  #memeHighlight {
-    display:none;
-    position:absolute;
-    width:30vw;
-    max-width:150px;
-    height:auto;
-    z-index:5;
-    pointer-events:none;
-    animation:pulse 1s infinite alternate;
+  #nextBtn::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    border: 3px solid red;
+    border-radius: 50%;
+    animation: pulse 1s infinite alternate;
+    z-index: -1;
   }
+  @keyframes pulse { 0% { transform: scale(1); opacity:0.7; } 100% { transform: scale(1.2); opacity:0.3; } }
 
-  @keyframes pulse { 0% { transform: scale(1);} 100% { transform: scale(1.1); } }
+  /* Menu PNG highlight (optional) */
+  #menuPNG {
+    position: absolute;
+    display: none;
+    width: calc(200px * var(--png-scale));
+    height: auto;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+  }
 
   /* Mobile adjustments */
   @media (max-width: 600px) {
-    #memeHighlight { width:40vw; }
-    #nextBtn { font-size:18px; padding:10px 20px; }
-    #message { font-size:18px; }
+    .cake-wrapper { transform: scale(1.4); } /* make cake bigger on mobile */
+    #nextBtn { font-size: 22px; padding: 14px 28px; }
+    #message { font-size: 20px; }
   }
 </style>
 </head>
@@ -98,20 +117,20 @@
   </div>
 
   <button id="nextBtn">Next 🎁</button>
-  <img id="memeHighlight" src="pog.png" alt="meme highlight" />
+  <img id="menuPNG" src="menu.png" alt="Menu highlight">
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     const message = document.getElementById("message");
     const flame = document.querySelector(".flame");
     const nextBtn = document.getElementById("nextBtn");
-    const memeHighlight = document.getElementById("memeHighlight");
+    const menuPNG = document.getElementById("menuPNG");
     let blownOut = false;
 
-    // Ask for mic
+    // Ask for microphone
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
-        message.textContent = "Blow the candles!";
+        message.textContent = "Blow the candles as hard as you can!";
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioCtx.createMediaStreamSource(stream);
         const analyser = audioCtx.createAnalyser();
@@ -142,26 +161,24 @@
       blownOut = true;
       message.textContent = "Happy Birthday Miss Supermodel Elif! 🎂✨";
 
+      // confetti
       confetti();
-      const audio = new Audio("bday.mp3");
+
+      // play music
+      const audio = new Audio("bday.mp3"); // replace with your music file
       audio.play();
 
+      // show next button
       nextBtn.style.display = "inline-block";
-      showMemeHighlight();
-    }
 
-    function showMemeHighlight(){
-      const cake = document.querySelector(".cake");
-      const rect = cake.getBoundingClientRect();
-      // PNG near cake, arrow points to Next button
-      memeHighlight.style.left = `${rect.left - rect.width*-0.1}px`;
-      memeHighlight.style.top  = `${rect.top + rect.height*1.4}px`;
-      memeHighlight.style.display = "block";
+      // show menu PNG if needed
+      menuPNG.style.display = "block";
     }
 
     nextBtn.addEventListener("click", ()=>{
-      window.location.href = "video.html";
+      window.location.href = "video.html"; // your video page
     });
+
   </script>
 </body>
 </html>
