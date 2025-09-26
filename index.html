@@ -154,8 +154,8 @@
       const cake = document.querySelector(".cake");
       const rect = cake.getBoundingClientRect();
       // PNG near cake, arrow points to Next button
-      memeHighlight.style.left = `${rect.left - rect.width*0.25}px`;
-      memeHighlight.style.top  = `${rect.top + rect.height*0.05}px`;
+      memeHighlight.style.left = `${rect.left - rect.width*-0.1}px`;
+      memeHighlight.style.top  = `${rect.top + rect.height*1.4}px`;
       memeHighlight.style.display = "block";
     }
 
