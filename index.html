@@ -3,28 +3,288 @@
 <head>
   <meta charset="UTF-8">
   <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #333;
+      margin: 0;
+      overflow: hidden;
+      color: white;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    /* Cake Wrapper Centering */
+    .cake-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 40px auto;
+      height: 300px;
+    }
+
+    /* Cake */
+    .cake {
+      position: relative;
+      width: 250px;
+      height: 200px;
+    }
+
+    .plate {
+      width: 270px;
+      height: 110px;
+      position: absolute;
+      bottom: -10px;
+      left: -10px;
+      background-color: #ccc;
+      border-radius: 50%;
+      box-shadow: 0 2px 0 #aaa, 0 4px 0 #aaa, 0 5px 40px rgba(0,0,0,0.5);
+    }
+
+    .layer {
+      position: absolute;
+      display: block;
+      width: 250px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #553c13;
+      box-shadow: 0 2px 0px #5e4417,
+                  0 4px 0px #4d3710,
+                  0 6px 0px #4a350f,
+                  0 8px 0px #47320e,
+                  0 10px 0px #44300d;
+    }
+    .layer-top { top: 0px; }
+    .layer-middle { top: 33px; }
+    .layer-bottom { top: 66px; }
+
+    .icing {
+      top: 2px;
+      left: 5px;
+      background-color: #f0e4d0;
+      width: 240px;
+      height: 90px;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .icing:before {
+      content: "";
+      position: absolute;
+      top: 4px; right: 5px; bottom: 6px; left: 5px;
+      background-color: #f6ebdc;
+      box-shadow: 0 0 4px #faf3e6, 0 0 4px #faf3e6, 0 0 4px #faf3e6;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .drip {
+      display: block;
+      width: 50px;
+      height: 60px;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      background-color: #f0e4d0;
+      position: absolute;
+    }
+    .drip1 { top: 53px; left: 5px; transform: skewY(15deg); height: 48px; width: 40px; }
+    .drip2 { top: 69px; left: 181px; transform: skewY(-15deg); }
+    .drip3 { top: 54px; left: 90px; width: 80px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
+
+    .candle {
+      background-color: #7B020B;
+      width: 16px;
+      height: 50px;
+      border-radius: 8px / 4px;
+      top: -20px;
+      left: 50%;
+      margin-left: -8px;
+      z-index: 10;
+      position: absolute;
+    }
+    .candle:before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 16px; height: 8px;
+      border-radius: 50%;
+      background-color: #9a0a13;
+    }
+
+    /* Flame ON */
+    .flame {
+      position: absolute;
+      background-color: orange;
+      width: 15px;
+      height: 35px;
+      border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+      top: -34px;
+      left: 50%;
+      margin-left: -7.5px;
+      z-index: 10;
+      box-shadow:
+        0 0 10px rgba(255,165,0,0.5),
+        0 0 20px rgba(255,165,0,0.5),
+        0 0 60px rgba(255,165,0,0.5),
+        0 0 80px rgba(255,165,0,0.5);
+      transform-origin: 50% 90%;
+      animation: flicker 1s ease-in-out alternate infinite;
+      cursor: pointer;
+    }
+
+    /* Flame OFF */
+    .flame.off {
+      display: none;
+    }
+
+    @keyframes flicker {
+      0% { transform: skewX(5deg); }
+      25% { transform: skewX(-5deg); }
+      50% { transform: skewX(10deg); }
+      75% { transform: skewX(-10deg); }
+      100% { transform: skewX(5deg); }
+    }
+
+    #nextBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #ff4081;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    #confetti {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>🎂 Happy Birthday 🎂</h1>
-    <p id="instructions">Click "Allow" on the microphone prompt, then blow out the candles!</p>
+    <p id="instructions">Click "Allow" on the microphone prompt, then blow out the candle (or tap it)!</p>
 
-    <div id="cake-area">
-      <img id="cake" src="cake.png" alt="Birthday Cake">
-      <div id="candles">
-        <img class="candle lit" src="candle.png" alt="Candle">
-        <img class="candle lit" src="candle.png" alt="Candle">
-        <img class="candle lit" src="candle.png" alt="Candle">
+    <div class="cake-wrapper">
+      <div class="cake">
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing"></div>
+        <div class="drip drip1"></div>
+        <div class="drip drip2"></div>
+        <div class="drip drip3"></div>
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
       </div>
     </div>
 
-    <button id="nextBtn" style="display:none;">Next ➡️</button>
+    <button id="nextBtn">Next ➡️</button>
   </div>
 
   <canvas id="confetti"></canvas>
   <audio id="music" src="birthday.mp3"></audio>
 
-  <script src="script.js"></script>
+  <script>
+    const flame = document.querySelector(".flame");
+    const nextBtn = document.getElementById("nextBtn");
+    const music = document.getElementById("music");
+    let blownOut = false;
+
+    // Tap candle to extinguish
+    flame.addEventListener("click", () => {
+      extinguishFlame();
+    });
+
+    function extinguishFlame() {
+      flame.classList.add("off");
+      checkAllOut();
+    }
+
+    function checkAllOut() {
+      if (flame.classList.contains("off") && !blownOut) {
+        triggerCelebration();
+      }
+    }
+
+    function triggerCelebration() {
+      blownOut = true;
+      music.play();
+      startConfetti();
+      nextBtn.style.display = "inline-block";
+    }
+
+    // Microphone detection
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        const audioCtx = new AudioContext();
+        const source = audioCtx.createMediaStreamSource(stream);
+        const analyser = audioCtx.createAnalyser();
+        source.connect(analyser);
+        const data = new Uint8Array(analyser.fftSize);
+
+        function detectBlow() {
+          analyser.getByteTimeDomainData(data);
+          let volume = 0;
+          for (let i = 0; i < data.length; i++) {
+            volume += Math.abs(data[i] - 128);
+          }
+          volume = volume / data.length;
+          if (volume > 15) { // threshold
+            extinguishFlame();
+          }
+          requestAnimationFrame(detectBlow);
+        }
+        detectBlow();
+      })
+      .catch(err => {
+        document.getElementById("instructions").innerText =
+          "Microphone blocked. Tap the candle to blow it out!";
+      });
+
+    // Confetti
+    function startConfetti() {
+      const confetti = document.getElementById("confetti");
+      const ctx = confetti.getContext("2d");
+      confetti.width = window.innerWidth;
+      confetti.height = window.innerHeight;
+
+      const pieces = Array.from({ length: 150 }, () => ({
+        x: Math.random() * confetti.width,
+        y: Math.random() * confetti.height - confetti.height,
+        w: 10, h: 20,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+        speed: Math.random() + 1
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, confetti.width, confetti.height);
+        pieces.forEach(p => {
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.w, p.h);
+          p.y += p.speed;
+          if (p.y > confetti.height) p.y = -20;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    // Next button
+    nextBtn.addEventListener("click", () => {
+      window.location.href = "surprise.html";
+    });
+  </script>
 </body>
 </html>
