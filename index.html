@@ -10,6 +10,7 @@
       font-family: "Comic Sans MS", cursive, sans-serif;
       text-align: center;
       padding-top: 40px;
+      margin: 0;
     }
 
     #message {
@@ -26,156 +27,51 @@
       height: 300px;
     }
 
-    .cake {
-      position: relative;
-      width: 250px;
-      height: 200px;
-    }
+    .cake { position: relative; width: 250px; height: 200px; }
+    .plate { width: 270px; height: 110px; position: absolute; bottom: -10px; left: -10px; background-color: #ccc; border-radius: 50%; box-shadow: 0 2px 0 #aaa,0 4px 0 #aaa,0 5px 40px rgba(0,0,0,0.5); }
+    .layer { position: absolute; width: 250px; height: 100px; border-radius: 50%; background-color: #553c13; box-shadow: 0 2px 0px #5e4417,0 4px 0px #4d3710,0 6px 0px #4a350f; }
+    .layer-top { top: 0px; } .layer-middle { top: 33px; } .layer-bottom { top: 66px; }
 
-    .plate {
-      width: 270px;
-      height: 110px;
-      position: absolute;
-      bottom: -10px;
-      left: -10px;
-      background-color: #ccc;
-      border-radius: 50%;
-      box-shadow: 0 2px 0 #aaa, 0 4px 0 #aaa, 0 5px 40px rgba(0,0,0,0.5);
-    }
+    .icing { top: 2px; left: 5px; background-color: #f0e4d0; width: 240px; height: 90px; border-radius: 50%; position: absolute; }
+    .icing:before { content:""; position:absolute; top:4px; right:5px; bottom:6px; left:5px; background-color:#f6ebdc; box-shadow:0 0 4px #faf3e6,0 0 4px #faf3e6,0 0 4px #faf3e6; border-radius:50%; }
 
-    .layer {
-      position: absolute;
-      width: 250px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: #553c13;
-      box-shadow: 0 2px 0px #5e4417, 0 4px 0px #4d3710, 0 6px 0px #4a350f;
-    }
-    .layer-top { top: 0px; }
-    .layer-middle { top: 33px; }
-    .layer-bottom { top: 66px; }
+    .drip { display:block; width:50px; height:60px; border-bottom-left-radius:25px; border-bottom-right-radius:25px; background-color:#f0e4d0; position:absolute; }
+    .drip1 { top:53px; left:5px; transform:skewY(15deg); height:48px; width:40px; }
+    .drip2 { top:69px; left:181px; transform:skewY(-15deg); }
+    .drip3 { top:54px; left:90px; width:80px; border-bottom-left-radius:40px; border-bottom-right-radius:40px; }
 
-    .icing {
-      top: 2px;
-      left: 5px;
-      background-color: #f0e4d0;
-      width: 240px;
-      height: 90px;
-      border-radius: 50%;
-      position: absolute;
-    }
-    .icing:before {
-      content: "";
-      position: absolute;
-      top: 4px; right: 5px; bottom: 6px; left: 5px;
-      background-color: #f6ebdc;
-      box-shadow: 0 0 4px #faf3e6, 0 0 4px #faf3e6, 0 0 4px #faf3e6;
-      border-radius: 50%;
-    }
-
-    .drip {
-      display: block;
-      width: 50px;
-      height: 60px;
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-      background-color: #f0e4d0;
-      position: absolute;
-    }
-    .drip1 { top: 53px; left: 5px; transform: skewY(15deg); height: 48px; width: 40px; }
-    .drip2 { top: 69px; left: 181px; transform: skewY(-15deg); }
-    .drip3 { top: 54px; left: 90px; width: 80px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
-
-    .candle {
-      background-color: #7B020B;
-      width: 16px;
-      height: 50px;
-      border-radius: 8px / 4px;
-      top: -20px;
-      left: 50%;
-      margin-left: -8px;
-      z-index: 10;
-      position: absolute;
-    }
-    .candle:before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 16px; height: 8px;
-      border-radius: 50%;
-      background-color: #9a0a13;
-    }
-
-    .flame {
-      position: absolute;
-      background-color: orange;
-      width: 15px;
-      height: 35px;
-      border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
-      top: -34px;
-      left: 50%;
-      margin-left: -7.5px;
-      z-index: 10;
-      box-shadow:
-        0 0 10px rgba(255,165,0,0.5),
-        0 0 20px rgba(255,165,0,0.5),
-        0 0 60px rgba(255,165,0,0.5),
-        0 0 80px rgba(255,165,0,0.5);
-      transform-origin: 50% 90%;
-      animation: flicker 1s ease-in-out alternate infinite;
-    }
-    .flame.off { display: none; }
-
-    @keyframes flicker {
-      0% { transform: skewX(5deg); }
-      25% { transform: skewX(-5deg); }
-      50% { transform: skewX(10deg); }
-      75% { transform: skewX(-10deg); }
-      100% { transform: skewX(5deg); }
-    }
+    .candle { background-color:#7B020B; width:16px; height:50px; border-radius:8px/4px; top:-20px; left:50%; margin-left:-8px; z-index:10; position:absolute; }
+    .candle:before { content:""; position:absolute; top:0; left:0; width:16px; height:8px; border-radius:50%; background-color:#9a0a13; }
+    .flame { position:absolute; background-color:orange; width:15px; height:35px; border-radius:10px 10px 10px 10px / 25px 25px 10px 10px; top:-34px; left:50%; margin-left:-7.5px; z-index:10; box-shadow:0 0 10px rgba(255,165,0,0.5),0 0 20px rgba(255,165,0,0.5),0 0 60px rgba(255,165,0,0.5),0 0 80px rgba(255,165,0,0.5); transform-origin:50% 90%; animation:flicker 1s ease-in-out alternate infinite; }
+    .flame.off { display:none; }
+    @keyframes flicker { 0%{transform:skewX(5deg);}25%{transform:skewX(-5deg);}50%{transform:skewX(10deg);}75%{transform:skewX(-10deg);}100%{transform:skewX(5deg);} }
 
     #nextBtn {
-      display: none;
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 20px;
-      border: none;
-      border-radius: 8px;
-      background: red;
-      color: white;
-      cursor: pointer;
-      position: relative;
+      display:none;
+      margin-top:20px;
+      padding:10px 20px;
+      font-size:20px;
+      border:none;
+      border-radius:8px;
+      background:red;
+      color:white;
+      cursor:pointer;
+      position:relative;
+      z-index:10;
     }
 
-    /* Red circle + arrow meme style */
-    .meme-highlight {
-      display: none;
-      position: relative;
-      margin-top: 10px;
-    }
-    .circle {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 140px;
-      height: 140px;
-      border: 6px solid red;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .arrow {
-      position: absolute;
-      top: -100px;
-      left: calc(50% + 70px);
-      font-size: 50px;
-      color: red;
-      transform: rotate(30deg);
+    #memeHighlight {
+      display:none;
+      position:absolute;
+      width:150px;
+      height:150px;
+      z-index:5;
+      pointer-events:none;
     }
   </style>
 </head>
 <body>
-  <div id="message">Please allow microphone access</div>
+  <div id="message">Please allow microphone access! </div>
 
   <div class="cake-wrapper">
     <div class="cake">
@@ -194,23 +90,20 @@
   </div>
 
   <button id="nextBtn">Next 🎁</button>
-  <div class="meme-highlight">
-    <div class="circle"></div>
-    <div class="arrow">➡️</div>
-  </div>
+  <img id="memeHighlight" src="pog.png" alt="meme highlight" />
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     const message = document.getElementById("message");
     const flame = document.querySelector(".flame");
     const nextBtn = document.getElementById("nextBtn");
-    const memeHighlight = document.querySelector(".meme-highlight");
+    const memeHighlight = document.getElementById("memeHighlight");
     let blownOut = false;
 
-    // Ask for microphone permission
+    // Ask for microphone
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
-        message.textContent = "Blow the candles 🎂";
+        message.textContent = "Blow the candles!";
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioCtx.createMediaStreamSource(stream);
         const analyser = audioCtx.createAnalyser();
@@ -219,27 +112,25 @@
 
         function detectBlow() {
           analyser.getByteFrequencyData(dataArray);
-          let volume = dataArray.reduce((a,b) => a+b) / dataArray.length;
-          if (volume > 20) {
-            extinguishFlame();
-          }
-          if (!blownOut) requestAnimationFrame(detectBlow);
+          let volume = dataArray.reduce((a,b)=>a+b)/dataArray.length;
+          if(volume>20) extinguishFlame();
+          if(!blownOut) requestAnimationFrame(detectBlow);
         }
         detectBlow();
       })
-      .catch(err => {
-        message.textContent = "Why did you deny the mic request 😭 It’s alright, you can tap the candle to turn it off.";
+      .catch(err=>{
+        message.textContent="Why did you deny the mic request 😭 It's alright, you can tap the candle to turn it off.";
       });
 
     flame.addEventListener("click", extinguishFlame);
 
-    function extinguishFlame() {
-      if (blownOut) return;
+    function extinguishFlame(){
+      if(blownOut) return;
       flame.classList.add("off");
       triggerCelebration();
     }
 
-    function triggerCelebration() {
+    function triggerCelebration(){
       blownOut = true;
       message.textContent = "Happy Birthday Miss Supermodel Elif! 🎂✨";
 
@@ -250,13 +141,22 @@
       const audio = new Audio("bday.mp3");
       audio.play();
 
-      // show next button + meme circle/arrow
+      // show Next button
       nextBtn.style.display = "inline-block";
+
+      // show PNG highlight
+      showMemeHighlight();
+    }
+
+    function showMemeHighlight(){
+      const rect = nextBtn.getBoundingClientRect();
+      // Adjust offsets according to your PNG
+      memeHighlight.style.left = `${rect.left - 50}px`;
+      memeHighlight.style.top = `${rect.top - 350}px`;
       memeHighlight.style.display = "block";
     }
 
-    // Go to video.html
-    nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", ()=>{
       window.location.href = "video.html";
     });
   </script>
